@@ -137,10 +137,21 @@ def load_pdf(pdf_path=r"C:\exports\langchain_demo.pdf"):
     `pypdf.PdfReader`. Splitting into one Document per page (rather than one
     Document for the whole PDF) mirrors PyPDFLoader's behaviour and makes it
     easy to cite/retrieve individual pages later (e.g. in a RAG pipeline).
+
+    Unlike the other load_* functions above, this one has no bundled sample
+    file - a real PDF is machine-specific, so the default `pdf_path` almost
+    certainly won't exist on your machine. Pass your own path to try this
+    against a real file.
     """
     print("Loading PDF document...")
 
-    reader = PdfReader(pdf_path)
+    try:
+        reader = PdfReader(pdf_path)
+    except FileNotFoundError:
+        print(f"No PDF found at {pdf_path!r} - pass your own PDF path to load_pdf() to try this.")
+        print()
+        return
+
     for page_number, page in enumerate(reader.pages):
         doc = Document(
             page_content=page.extract_text(),

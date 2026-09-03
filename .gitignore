@@ -216,3 +216,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local embedding cache (embeddings.py sample)
+.embedding_cache.json
+
+# Persisted Chroma collection (embedding_chroma_persistence.py sample)
+.chroma_persistence_demo/

@@ -3,7 +3,7 @@ Sample code that verifies AWS Bedrock credentials/model access are working,
 by sending one trivial prompt through `ChatBedrockConverse` and printing the
 response (or the error, if credentials/model access are misconfigured).
 
-Run directly with: uv run python check_connection.py
+Run directly with: uv run ./check_connection.py
 """
 
 from botocore.exceptions import ClientError
@@ -14,7 +14,7 @@ from config import Config, load_config
 
 
 def main() -> None:
-    print("Check bedrock connection")
+    print("=== Check bedrock connection ===")
     config = load_config()
     # Print the resolved config (but not the actual secret values) so it's
     # obvious at a glance whether env vars/.env were picked up correctly.
@@ -53,5 +53,6 @@ def check_bedrock_connection(config: Config) -> None:
         # this script reports the problem instead of crashing with a traceback.
         print(f"Bedrock call failed (model={model_id}): {e}")
 
-if (__name__ == "__main__"):
+
+if __name__ == "__main__":
     main()
